@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class SkyMine extends JavaPlugin {
 
     private static SkyMine plugin;
-    RespawnBlocksRunnable blockRespawner;
+    private RespawnBlocksRunnable blockRespawner;
 
     @Override
     public void onEnable() {
@@ -34,5 +34,9 @@ public final class SkyMine extends JavaPlugin {
 
     public static SkyMine getPlugin() {
         return plugin;
+    }
+
+    public RespawnBlocksRunnable getBlockRespawner() {
+        return blockRespawner;
     }
 }
