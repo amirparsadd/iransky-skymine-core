@@ -1,4 +1,4 @@
-package com.amirparsa.skymine;
+package com.amirparsa.skymine.respawnblocks;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -6,9 +6,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 
 public class BlockDataMap {
-    private final HashMap<Material, BlockData> map = new HashMap<>();
+    private static final HashMap<Material, BlockData> map = new HashMap<>();
 
-    public BlockDataMap(){
+    static {
         map.put(Material.BIRCH_WOOD, new BlockData(0, new ItemStack(Material.BIRCH_WOOD), false, new Material[]{null, Material.WOODEN_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLDEN_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE}));
         map.put(Material.STRIPPED_BIRCH_WOOD, new BlockData(0, new ItemStack(Material.BIRCH_WOOD), false, new Material[]{null, Material.WOODEN_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLDEN_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE}));
         map.put(Material.BIRCH_PLANKS, new BlockData(0, new ItemStack(Material.BIRCH_WOOD), false, new Material[]{null, Material.WOODEN_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLDEN_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE}));
@@ -22,7 +22,7 @@ public class BlockDataMap {
 
     }
 
-    public HashMap<Material, BlockData> getMap() {
+    public static HashMap<Material, BlockData> getMap() {
         return map;
     }
 }

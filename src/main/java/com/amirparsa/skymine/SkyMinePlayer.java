@@ -1,2 +1,5 @@
-package com.amirparsa.skymine;public class SkyMinePlayer {
+package com.amirparsa.skymine;
+
+public class SkyMinePlayer {
+    //TODO Implement
 }
