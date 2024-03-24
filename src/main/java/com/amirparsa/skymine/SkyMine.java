@@ -1,5 +1,7 @@
 package com.amirparsa.skymine;
 
+import com.amirparsa.skymine.handlers.BlockBreakHandler;
+import com.amirparsa.skymine.handlers.PlayerConnectionHandler;
 import com.amirparsa.skymine.respawnblocks.BrokenBlock;
 import com.amirparsa.skymine.respawnblocks.RespawnBlocksRunnable;
 import org.bukkit.Bukkit;
@@ -9,6 +11,7 @@ public final class SkyMine extends JavaPlugin {
 
     private static SkyMine plugin;
     private RespawnBlocksRunnable blockRespawner;
+    private PlayerManager playerManager = new PlayerManager();
 
     @Override
     public void onEnable() {
@@ -20,6 +23,9 @@ public final class SkyMine extends JavaPlugin {
             new PlaceholderExpansion(this).register();
         }
 
+        //Register Stuff
+        registerHandlers();
+
         //Setup RespawnBlocksRunnable
         blockRespawner = new RespawnBlocksRunnable();
         blockRespawner.runTaskTimer(this, 1, 20 * 5);
@@ -30,6 +36,15 @@ public final class SkyMine extends JavaPlugin {
         for(BrokenBlock block : blockRespawner.getBlocks()){
             block.getLocation().getBlock().setType(block.getType());
         }
+
+        for(SkyMinePlayer player : playerManager.getPlayers().values()){
+            player.save();
+        }
+    }
+
+    public void registerHandlers() {
+        getServer().getPluginManager().registerEvents(new BlockBreakHandler(), this);
+        getServer().getPluginManager().registerEvents(new PlayerConnectionHandler(), this);
     }
 
     public static SkyMine getPlugin() {
@@ -38,5 +53,9 @@ public final class SkyMine extends JavaPlugin {
 
     public RespawnBlocksRunnable getBlockRespawner() {
         return blockRespawner;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 }

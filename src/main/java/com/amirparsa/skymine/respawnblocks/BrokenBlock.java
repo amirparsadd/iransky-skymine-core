@@ -37,6 +37,10 @@ public class BrokenBlock {
         this.location = location;
     }
 
+    public void lowerTimer(){
+        timer--;
+    }
+
     public BrokenBlock(Location location, Material type) {
         this.location = location;
         this.type = type;

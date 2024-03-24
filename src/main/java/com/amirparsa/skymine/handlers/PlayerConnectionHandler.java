@@ -1,6 +1,6 @@
 package com.amirparsa.skymine.handlers;
 
-import com.amirparsa.skymine.PlayerManager;
+import com.amirparsa.skymine.SkyMine;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -10,11 +10,11 @@ public class PlayerConnectionHandler implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
-        PlayerManager.addPlayer(event.getPlayer().getUniqueId());
+        SkyMine.getPlugin().getPlayerManager().addPlayer(event.getPlayer().getUniqueId());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        PlayerManager.removePlayer(event.getPlayer().getUniqueId());
+        SkyMine.getPlugin().getPlayerManager().removePlayer(event.getPlayer().getUniqueId());
     }
 }
