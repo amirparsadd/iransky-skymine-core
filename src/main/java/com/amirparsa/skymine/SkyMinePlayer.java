@@ -1,8 +1,12 @@
 package com.amirparsa.skymine;
 
 import com.amirparsa.skymine.utils.PDCHelper;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 
 import java.util.UUID;
 
@@ -44,6 +48,27 @@ public class SkyMinePlayer {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public void increaseXP(int amount){
+        xp += amount;
+
+        TextComponent textComponent = new TextComponent();
+        textComponent.setColor(net.md_5.bungee.api.ChatColor.DARK_AQUA);
+        textComponent.setBold(true);
+        textComponent.setText("+" + amount + " ("+ xp + "/" + (level * 100) + ")");
+        Bukkit.getPlayer(uuid).spigot().sendMessage(ChatMessageType.ACTION_BAR, textComponent);
+
+        if(xp > level * 100){
+            xp -= level * 100;
+            level++;
+            Bukkit.getPlayer(uuid).sendTitle(
+                    ChatColor.AQUA.toString() + ChatColor.BOLD + "LEVEL UP!",
+                    ChatColor.DARK_AQUA.toString() + (level-1) + " ➡ " + level,
+                    4, 35, 7);
+            Bukkit.getPlayer(uuid).playSound(Bukkit.getPlayer(uuid).getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 100, 1);
+            Bukkit.dispatchCommand(Bukkit.getPlayer(uuid), "/crates give " + Bukkit.getPlayer(uuid).getName() + " Mining");
+        }
     }
 
     public void setUuid(UUID uuid) {

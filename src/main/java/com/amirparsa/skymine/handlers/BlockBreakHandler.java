@@ -1,6 +1,5 @@
 package com.amirparsa.skymine.handlers;
 
-import com.amirparsa.skymine.PlayerManager;
 import com.amirparsa.skymine.SkyMine;
 import com.amirparsa.skymine.SkyMinePlayer;
 import com.amirparsa.skymine.respawnblocks.BlockData;
@@ -18,9 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
 
 public class BlockBreakHandler implements Listener {
 
@@ -35,6 +33,12 @@ public class BlockBreakHandler implements Listener {
         Block block = event.getBlock();
         BlockData blockData = BlockDataMap.getMap().get(block.getType());
 
+        if(playerAccount.getLevel() < blockData.level-1){
+            player.sendMessage(ChatColor.RED + "You Need To Be Level " + blockData.level + " To Break This!");
+            event.setCancelled(true);
+            return;
+        }
+
         if(!Arrays.asList(blockData.mineable).contains(player.getInventory().getItemInMainHand().getType())){
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You Atleast Need A " + Utils.getFriendlyText(blockData.mineable[0] == Material.AIR ? "FIST" : blockData.mineable[0].name()) + " To Break This!");
@@ -43,16 +47,29 @@ public class BlockBreakHandler implements Listener {
 
         playerAccount.setLastBlockBroken(block.getType());
         playerAccount.setBlocksBroken(playerAccount.getBlocksBroken() + 1);
+
+        int totalXP = 1;
+        if(player.hasPermission("iransky.skyking")) totalXP++;
+        if(player.hasPermission("iransky.skywarrior")) totalXP++;
+        if(player.hasPermission("iransky.skygod")) totalXP++;
+        if(player.hasPermission("iransky.iransky")) totalXP++;
+        playerAccount.increaseXP(totalXP);
+
         SkyMine.getPlugin().getBlockRespawner().getBlocks().add(new BrokenBlock(block.getLocation(), block.getType()));
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onBlockDropItem(BlockDropItemEvent event) {
         event.setCancelled(true);
 
         Player player = event.getPlayer();
+        if(player.getGameMode().equals(GameMode.CREATIVE)) return;
+
         SkyMinePlayer playerAccount = SkyMine.getPlugin().getPlayerManager().getPlayer(player.getUniqueId());
         BlockData blockData = BlockDataMap.getMap().get(playerAccount.getLastBlockBroken());
+        if(blockData == null) return;
+
+        //TODO implement magic ore
 
         player.getInventory().addItem(blockData.drop);
     }

@@ -36,7 +36,15 @@ public class PlaceholderExpansion extends me.clip.placeholderapi.expansion.Place
 
     @Override
     public String onRequest(OfflinePlayer player, @NotNull String params) {
-
-        return null; // 
+        SkyMinePlayer playerAccount = plugin.getPlayerManager().getPlayer(player.getUniqueId());
+        if(playerAccount == null) return null;
+        switch (params){
+            case "level": return playerAccount.getLevel() + "";
+            case "xp": return playerAccount.getXp() + "";
+            case "magicore": return playerAccount.getMagicOre() + "";
+            case "blocks": return playerAccount.getBlocksBroken() + "";
+            case "progress": return (playerAccount.getXp() * 100 / (playerAccount.getLevel() * 100)) + "";
+        }
+        return null;
     }
 }

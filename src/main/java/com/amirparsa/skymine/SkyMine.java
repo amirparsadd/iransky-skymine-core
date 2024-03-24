@@ -28,7 +28,7 @@ public final class SkyMine extends JavaPlugin {
 
         //Setup RespawnBlocksRunnable
         blockRespawner = new RespawnBlocksRunnable();
-        blockRespawner.runTaskTimer(this, 1, 20 * 5);
+        blockRespawner.runTaskTimer(this, 1, 20);
     }
 
     @Override

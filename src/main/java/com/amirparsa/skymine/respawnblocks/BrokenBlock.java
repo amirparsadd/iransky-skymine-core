@@ -26,7 +26,7 @@ public class BrokenBlock {
     }
 
     public void setTimer(int timer) {
-        timer = timer;
+        this.timer = timer;
     }
 
     public Location getLocation() {
@@ -44,7 +44,7 @@ public class BrokenBlock {
     public BrokenBlock(Location location, Material type) {
         this.location = location;
         this.type = type;
-        this.timer = 5;
+        this.timer = 20;
     }
 
     public BrokenBlock(Location location, Material type, int timer) {

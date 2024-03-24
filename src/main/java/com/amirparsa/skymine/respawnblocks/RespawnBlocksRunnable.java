@@ -1,6 +1,5 @@
 package com.amirparsa.skymine.respawnblocks;
 
-import com.amirparsa.skymine.SkyMine;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -11,13 +10,14 @@ public class RespawnBlocksRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        for (BrokenBlock block : blocks) {
-            block.lowerTimer();
-            if(block.getTimer() <= 0) {
-                if (block.isLoaded()) {
-                    block.getLocation().getBlock().setType(block.getType());
-                    blocks.remove(block);
-                }
+        if(blocks.isEmpty()) return;
+        for (int i = 0; i < blocks.size(); i++) {
+            if(blocks.get(i).getTimer() == 0){
+                blocks.get(i).getLocation().getBlock().setType(blocks.get(i).getType());
+                blocks.remove(i);
+                i--;
+            }else{
+                blocks.get(i).setTimer(blocks.get(i).getTimer() - 1);
             }
         }
     }
