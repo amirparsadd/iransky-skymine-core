@@ -1,0 +1,6 @@
+name: SkyMine
+version: '1.0'
+main: com.amirparsa.skymine.SkyMine
+api-version: '1.16'
+
+softdepend: [PlaceholderAPI]
