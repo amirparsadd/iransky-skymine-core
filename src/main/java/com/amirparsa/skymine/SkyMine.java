@@ -1,5 +1,6 @@
 package com.amirparsa.skymine;
 
+import com.amirparsa.skymine.commands.AddMagicOreCommand;
 import com.amirparsa.skymine.handlers.BlockBreakHandler;
 import com.amirparsa.skymine.handlers.PlayerConnectionHandler;
 import com.amirparsa.skymine.respawnblocks.BrokenBlock;
@@ -25,6 +26,7 @@ public final class SkyMine extends JavaPlugin {
 
         //Register Stuff
         registerHandlers();
+        registerCommands();
 
         //Setup RespawnBlocksRunnable
         blockRespawner = new RespawnBlocksRunnable();
@@ -45,6 +47,10 @@ public final class SkyMine extends JavaPlugin {
     public void registerHandlers() {
         getServer().getPluginManager().registerEvents(new BlockBreakHandler(), this);
         getServer().getPluginManager().registerEvents(new PlayerConnectionHandler(), this);
+    }
+
+    public void registerCommands(){
+        getCommand("addmagicore").setExecutor(new AddMagicOreCommand());
     }
 
     public static SkyMine getPlugin() {

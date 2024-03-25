@@ -4,3 +4,9 @@ main: com.amirparsa.skymine.SkyMine
 api-version: '1.16'
 
 softdepend: [PlaceholderAPI]
+
+commands:
+  addmagicore:
+    usage: /<command> player amount
+    description: Admin Command! Add Magic Ore To A Player
+    permission: iransky.admin

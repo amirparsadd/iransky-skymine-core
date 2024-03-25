@@ -27,13 +27,13 @@ public class BlockDataMap {
         map.put(Material.EMERALD_BLOCK, new BlockData(32, new ItemStack(Material.EMERALD, 9), false, new Material[]{Material.GOLDEN_PICKAXE, Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE}));
 
         map.put(Material.DIAMOND_ORE, new BlockData(37, new ItemStack(Material.DIAMOND), false, new Material[]{Material.GOLDEN_PICKAXE, Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE}));
-        map.put(Material.DIAMOND_BLOCK, new BlockData(40, new ItemStack(Material.DIAMOND, 9), false, new Material[]{Material.GOLDEN_PICKAXE, Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE}));
+        map.put(Material.DIAMOND_BLOCK, new BlockData(40, new ItemStack(Material.DIAMOND, 9), true, new Material[]{Material.GOLDEN_PICKAXE, Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE}));
 
-        map.put(Material.ANCIENT_DEBRIS, new BlockData(45, new ItemStack(Material.NETHERITE_INGOT), false, new Material[]{Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE}));
-        map.put(Material.OBSIDIAN, new BlockData(50, new ItemStack(Material.OBSIDIAN), false, new Material[]{Material.NETHERITE_PICKAXE}));
-        map.put(Material.CRYING_OBSIDIAN, new BlockData(50, new ItemStack(Material.CRYING_OBSIDIAN), false, new Material[]{Material.NETHERITE_PICKAXE}));
+        map.put(Material.ANCIENT_DEBRIS, new BlockData(45, new ItemStack(Material.NETHERITE_INGOT), true, new Material[]{Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE}));
+        map.put(Material.OBSIDIAN, new BlockData(50, new ItemStack(Material.OBSIDIAN), true, new Material[]{Material.NETHERITE_PICKAXE}));
+        map.put(Material.CRYING_OBSIDIAN, new BlockData(50, new ItemStack(Material.CRYING_OBSIDIAN), true, new Material[]{Material.NETHERITE_PICKAXE}));
 
-        map.put(Material.END_STONE, new BlockData(70, new ItemStack(Material.END_STONE), false, new Material[]{Material.NETHERITE_PICKAXE}));
+        map.put(Material.END_STONE, new BlockData(70, new ItemStack(Material.END_STONE), true, new Material[]{Material.NETHERITE_PICKAXE}));
         map.put(Material.ENDER_CHEST, new BlockData(70, new ItemStack(Material.ENDER_CHEST), true, new Material[]{Material.NETHERITE_PICKAXE}));
         map.put(Material.PURPLE_STAINED_GLASS, new BlockData(100, new ItemStack(Material.POTATO), true, new Material[]{Material.NETHERITE_PICKAXE}));
     }
