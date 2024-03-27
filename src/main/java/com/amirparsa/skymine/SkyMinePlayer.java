@@ -67,7 +67,7 @@ public class SkyMinePlayer {
                     ChatColor.DARK_AQUA.toString() + (level-1) + " ➡ " + level,
                     4, 35, 7);
             Bukkit.getPlayer(uuid).playSound(Bukkit.getPlayer(uuid).getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 100, 1);
-            Bukkit.dispatchCommand(Bukkit.getPlayer(uuid), "/crates give " + Bukkit.getPlayer(uuid).getName() + " Mining");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "crates give " + Bukkit.getPlayer(uuid).getName() + " Mining");
         }
     }
 

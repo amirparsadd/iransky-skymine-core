@@ -40,6 +40,7 @@ public class AddMagicOreCommand implements CommandExecutor {
 
             playerAccount.setMagicOre(playerAccount.getMagicOre() + amount);
         }else if(commandSender instanceof Player p){
+            if(!p.hasPermission("iransky.admin")) return true;
             if(strings.length != 2){
                 p.sendMessage(ChatColor.RED + "Wrong Arguments");
                 return false;

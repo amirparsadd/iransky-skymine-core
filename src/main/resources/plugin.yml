@@ -10,3 +10,7 @@ commands:
     usage: /<command> player amount
     description: Admin Command! Add Magic Ore To A Player
     permission: iransky.admin
+  customitem:
+    usage: /<command> item level magical
+    description: Admin Command! Add An Item To A Player
+    permission: iransky.admin

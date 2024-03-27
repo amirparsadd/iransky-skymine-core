@@ -1,5 +1,6 @@
 package com.amirparsa.skymine.handlers;
 
+import com.amirparsa.skymine.KeyStore;
 import com.amirparsa.skymine.SkyMine;
 import com.amirparsa.skymine.SkyMinePlayer;
 import com.amirparsa.skymine.respawnblocks.BlockData;
@@ -16,11 +17,15 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDropItemEvent;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
+import java.util.Random;
 
 
 public class BlockBreakHandler implements Listener {
+
+    private static final Random random = new Random();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
@@ -42,6 +47,12 @@ public class BlockBreakHandler implements Listener {
         if(!Arrays.asList(blockData.mineable).contains(player.getInventory().getItemInMainHand().getType())){
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You Atleast Need A " + Utils.getFriendlyText(blockData.mineable[0] == Material.AIR ? "FIST" : blockData.mineable[0].name()) + " To Break This!");
+            return;
+        }
+
+        if (blockData.magical && !player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(KeyStore.MAGICAL_ATTR.key, PersistentDataType.INTEGER)){
+            player.sendMessage(ChatColor.RED + "This Block IS Magical! You Need A Magical Tool To Break It.");
+            event.setCancelled(true);
             return;
         }
 
@@ -69,7 +80,10 @@ public class BlockBreakHandler implements Listener {
         BlockData blockData = BlockDataMap.getMap().get(playerAccount.getLastBlockBroken());
         if(blockData == null) return;
 
-        //TODO implement magic ore
+        if(blockData.magical && random.nextInt(20) == 7){
+            playerAccount.setMagicOre(playerAccount.getMagicOre() + 1);
+            player.sendMessage(ChatColor.DARK_PURPLE + ChatColor.BOLD.toString() + "MAGICAL DROP! " + ChatColor.LIGHT_PURPLE + "+1 Magic Ore");
+        }
 
         player.getInventory().addItem(blockData.drop);
     }

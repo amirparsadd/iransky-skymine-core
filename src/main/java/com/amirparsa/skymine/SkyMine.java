@@ -1,6 +1,9 @@
 package com.amirparsa.skymine;
 
 import com.amirparsa.skymine.commands.AddMagicOreCommand;
+import com.amirparsa.skymine.commands.CustomItemCommand;
+import com.amirparsa.skymine.customitem.ItemManager;
+import com.amirparsa.skymine.customitem.store.*;
 import com.amirparsa.skymine.handlers.BlockBreakHandler;
 import com.amirparsa.skymine.handlers.PlayerConnectionHandler;
 import com.amirparsa.skymine.respawnblocks.BrokenBlock;
@@ -13,6 +16,7 @@ public final class SkyMine extends JavaPlugin {
     private static SkyMine plugin;
     private RespawnBlocksRunnable blockRespawner;
     private PlayerManager playerManager = new PlayerManager();
+    private ItemManager itemManager = new ItemManager();
 
     @Override
     public void onEnable() {
@@ -27,6 +31,7 @@ public final class SkyMine extends JavaPlugin {
         //Register Stuff
         registerHandlers();
         registerCommands();
+        registerItems();
 
         //Setup RespawnBlocksRunnable
         blockRespawner = new RespawnBlocksRunnable();
@@ -51,6 +56,21 @@ public final class SkyMine extends JavaPlugin {
 
     public void registerCommands(){
         getCommand("addmagicore").setExecutor(new AddMagicOreCommand());
+        getCommand("customitem").setExecutor(new CustomItemCommand());
+    }
+
+    public void registerItems(){
+        itemManager.register(new TestShovel());
+        itemManager.register(new WoodenPick());
+        itemManager.register(new WoodenHelmet());
+        itemManager.register(new WoodenBoots());
+        itemManager.register(new WoodenLeggings());
+        itemManager.register(new WoodenChestplate());
+        itemManager.register(new WoodenAxe());
+        itemManager.register(new WoodenSword());
+        itemManager.register(new StoneAxe());
+        itemManager.register(new StoneSword());
+        itemManager.register(new StonePick());
     }
 
     public static SkyMine getPlugin() {
@@ -63,5 +83,9 @@ public final class SkyMine extends JavaPlugin {
 
     public PlayerManager getPlayerManager() {
         return playerManager;
+    }
+
+    public ItemManager getItemManager() {
+        return itemManager;
     }
 }
