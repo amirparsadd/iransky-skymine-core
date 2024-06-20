@@ -1,2 +1,2 @@
 # IranSky SkyMine Project (iransky-skymine-core)
-Currently Under Development
+This Project Is Abandoned Due To The Downfall Of IranSky
