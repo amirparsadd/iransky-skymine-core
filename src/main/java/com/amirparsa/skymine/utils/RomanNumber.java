@@ -23,13 +23,10 @@ public class RomanNumber {
         map.put(1, "I");
 
     }
-
-    /*
-     * this is used to generate a roman number
-     *
-     * @param number the number to convert
-     * */
+    
     public static String toRoman(int number) {
+        if(number < 1) return "" + number
+        
         int l =  map.floorKey(number);
         if ( number == l ) {
             return map.get(number);
