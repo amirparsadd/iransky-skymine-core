@@ -55,11 +55,14 @@ public abstract class CustomItem {
         ArrayList<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.DARK_GRAY + " ");
-        lore.add(ChatColor.LIGHT_PURPLE + "Enchantments");
-        for(CustomEnchantment enchantment : enchantments){
-            lore.add(ChatColor.AQUA + "|- " + enchantment.getRarity().color + Utils.getFriendlyText(enchantment.getEnchantment().getKey().getKey()) + " " + RomanNumber.toRoman(enchantment.getLevel() + (enchantment.getLevelMultiplier() * (level-1))));
+        
+        if(enchantments.length != 0){
+            lore.add(ChatColor.LIGHT_PURPLE + "Enchantments");
+            for(CustomEnchantment enchantment : enchantments){
+                lore.add(ChatColor.AQUA + "|- " + enchantment.getRarity().color + Utils.getFriendlyText(enchantment.getEnchantment().getKey().getKey()) + " " + RomanNumber.toRoman(enchantment.getLevel() + (enchantment.getLevelMultiplier() * (level-1))));
+            }
+            lore.add(ChatColor.DARK_GRAY + " ");
         }
-        lore.add(ChatColor.DARK_GRAY + " ");
 
         if(magical) lore.add(ChatColor.GRAY + "This Item Is Magical!");
         lore.add(rarity.color + ChatColor.BOLD.toString() + rarity.name() + " " + type.name());
